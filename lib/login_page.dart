@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import './home.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+
+String username = "admin@gmail.com";
+String password = 'admin123';
+
+  // to fetch values from textfield
+  TextEditingController usercontroller = TextEditingController();
+  TextEditingController passcontroller = TextEditingController();
+
+  LoginPage({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +58,27 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-            ElevatedButton(onPressed: () {}, child: Text("Login"))
+            ElevatedButton(
+               onPressed: () {
+                  if (username == usercontroller.text &&
+                      password == passcontroller.text) {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
+                  } else {
+                    // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    //   content: Text("inavlid username or password"),
+                    //   backgroundColor: Colors.red,
+                    // ));
+                    Fluttertoast.showToast(
+                        msg: "Invalid Username or Password",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM_LEFT,
+                       // timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
+                  }
+            }, child: Text("Login"),)
           ]),
         ));
   }

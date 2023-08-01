@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) =>
-              const LoginPage())); //when timer completes it redirects to home
+             LoginPage())); //when timer completes it redirects to home
     });
     super.initState();
   }
