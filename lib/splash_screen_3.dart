@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:luminar_sample_project/stateful_login.dart';
 import 'login_page.dart';
 
 void main() => runApp(const MaterialApp(
@@ -20,10 +21,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     //what will happen when the page / app is  first launched
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) =>
-             LoginPage())); //when timer completes it redirects to home
+             Login2())); //when timer completes it redirects to home
     });
     super.initState();
   }
