@@ -156,7 +156,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       initpassword = password;
                       if (password!.isEmpty || password.length < 8) {
                       initpassword = password;
-                        return 'field is empty / invalid length';
+                        return 'field is empty / Invalid length';
                       } else {
                         return null;
                       }
