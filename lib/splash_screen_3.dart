@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:luminar_sample_project/stateful_login.dart';
-import 'login_page.dart';
 
 void main() => runApp(const MaterialApp(
   debugShowCheckedModeBanner: false,

@@ -10,13 +10,8 @@ class Login2 extends StatefulWidget {
 }
 
 class _Login2State extends State<Login2> {
-
-String username = "admin@gmail.com";
-String password = 'admin123';
-
-  // to fetch values from textfield
-  TextEditingController usercontroller = TextEditingController();
-  TextEditingController passcontroller = TextEditingController();
+  var formkey = GlobalKey<FormState>();
+  bool nopasswordvisibility = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +21,17 @@ String password = 'admin123';
       ),
       body: Center(
         child: Form(
+          key: formkey, // this key used to fetch the current state of the form
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top : 20.0,left: 10,right: 10),
+                padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
                 child: TextFormField(
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50)),
                       labelText: "Username",
-                      hintText : "Enter your mail"
-                  ),
+                      hintText: "Enter your mail"),
                   validator: (username) {
                     if (username!.isEmpty || !username.contains('@')) {
                       return 'field is empty/Invalid';
@@ -47,17 +42,31 @@ String password = 'admin123';
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10,right: 10,top: 20,bottom: 20),
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, top: 20, bottom: 20),
                 child: TextFormField(
+                  obscureText: nopasswordvisibility,
                   validator: (password) {
-                    if (password!.isEmpty || password.length == 8) {
+                    if (password!.isEmpty || password.length < 8) {
                       return 'field is empty / invalid length';
                     } else {
                       return null;
                     }
                   },
                   decoration: InputDecoration(
-                    hintText: "Enter your password",
+                      suffixIcon: IconButton(onPressed: (){
+                        setState(() {
+                        if(nopasswordvisibility == true)
+                        {
+                          nopasswordvisibility=false;
+                        }
+                        else{
+                          nopasswordvisibility=true;
+                        }
+                        });
+                      },
+                      icon:  Icon(nopasswordvisibility == true ? Icons.visibility_off_sharp : Icons.visibility) ),
+                      hintText: "Enter your password",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50)),
                       labelText: "Password"),
@@ -66,20 +75,20 @@ String password = 'admin123';
               Center(
                 child: ElevatedButton(
                     onPressed: () {
-                      if (username == usercontroller.text &&
-                      password == passcontroller.text) {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Home()));
-                  } else {
-                    Fluttertoast.showToast(
-                        msg: "Invalid Username or Password",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM_LEFT,
-                       // timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0
-                    );
-                  }
+                      final valid = formkey.currentState!.validate();
+                      if (valid) {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => Home()));
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: "Invalid Username or Password",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM_LEFT,
+                            // timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }
                     },
                     child: Text("Login")),
               ),
