@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -61,11 +62,15 @@ class GridviewWork extends StatelessWidget {
             SizedBox(
               width: 50,
             ),
-            Icon(icons[index]),
+            Icon(icons[index],
+            size: 36,),
             SizedBox(
               width: 50,
             ),
-            Text("Heart\nShaker")
+            Text("Heart\nShaker",
+            style: GoogleFonts.roboto(
+              fontSize: 18,
+            ),)
           ],
         ),
       ),
