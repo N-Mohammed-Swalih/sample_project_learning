@@ -3,7 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:luminar_sample_project/home.dart';
 
 class RegistrationPage extends StatefulWidget {
-   RegistrationPage({super.key});
+   const RegistrationPage({super.key});
 
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
@@ -13,7 +13,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   var formkey = GlobalKey<FormState>();
 
   String? initpassword;
-
   String? confirmpassword;
 
   @override
