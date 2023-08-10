@@ -14,6 +14,7 @@ class ExpandedandColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white30,
       appBar: AppBar(
         title:  Text("Porsche 911",
         style: GoogleFonts.lobster(
