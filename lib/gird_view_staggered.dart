@@ -2,50 +2,109 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 void main() {
-  runApp( MaterialApp(
-    home: GridStaggered(),
+  runApp(MaterialApp(
+    home: Steaggerdgridexample(),
   ));
 }
 
-class GridStaggered extends StatelessWidget {
-   GridStaggered({super.key});
-
-  dynamic crosscount = [1,2,3,2,4,2,3];
-  dynamic maincount =[2,1,2,3,4,5,6,2,1];
-  dynamic icons = [Icons.abc];
-  dynamic colors = [
-    Colors.red,
-    Colors.green,
-    Colors.accents,
-    Colors.black38,
-    Colors.blueAccent,
-    Colors.teal
-  ];
+class Steaggerdgridexample extends StatelessWidget {
+  const Steaggerdgridexample({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text('Grid Staggered'),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: StaggeredGrid.count(
-            crossAxisCount: 4,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-            children: [
-               StaggeredGridTile.count(
-                crossAxisCellCount: crosscount,
-                mainAxisCellCount: maincount,
-                child: Container(
-                  color: colors,
-                  child: Center(child: Icon(icons)),
+      appBar: AppBar(
+        title: Text("staggered"),
+      ),
+      body: SingleChildScrollView(
+        child: StaggeredGrid.count(
+          crossAxisCount: 4,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          children: [
+            StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 2,
+              child: Container(
+                color: Colors.orange,
+                child: Center(
+                  child: Icon(Icons.home),
                 ),
               ),
-            ],
-          ),
-        ));
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 4,
+              child: Container(
+                color: Colors.green,
+                child: Center(
+                  child: Icon(Icons.cabin),
+                ),
+              ),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 1,
+              mainAxisCellCount: 3,
+              child: Container(
+                color: Colors.yellow,
+                child: Center(
+                  child: Icon(Icons.person),
+                ),
+              ),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 1,
+              mainAxisCellCount: 2,
+              child: Container(
+                color: Colors.blue,
+                child: Center(
+                  child: Icon(Icons.dangerous),
+                ),
+              ),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 2,
+              child: Container(
+                color: Colors.pink,
+                child: Center(
+                  child: Icon(Icons.favorite),
+                ),
+              ),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 1,
+              mainAxisCellCount: 3,
+              child: Container(
+                color: Colors.greenAccent,
+                child: Center(
+                  child: Icon(Icons.message),
+                ),
+              ),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 1,
+              mainAxisCellCount: 3,
+              child: Container(
+                color: Colors.red,
+                child: Center(
+                  child: Icon(Icons.face),
+                ),
+              ),
+            ),
+            StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 1,
+              child: Container(
+                color: Colors.indigo,
+                child: Center(
+                  child: Icon(Icons.face),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
