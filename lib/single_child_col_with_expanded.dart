@@ -28,7 +28,7 @@ class ExpandedandColumn extends StatelessWidget {
       body: Column(children: [
         Center(
           child: Image.network(
-              "https://images.unsplash.com/photo-1619382303579-5184c60e413f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjF8fHBvcnNjaGUlMjA5MTF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"),
+              "https://i.guim.co.uk/img/media/fd9b9ed4d416bd1867fe356e49975b9527c26765/0_59_2588_1553/master/2588.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=9524bc6ee58b97a7230c38228afaecec"),
         ),
         SizedBox(
           height: 20,
