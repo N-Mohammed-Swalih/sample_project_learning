@@ -1,54 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: BottomNavBar(),
+    home: Sliverexample(),
   ));
 }
 
-class BottomNavBar extends StatefulWidget {
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
+class Sliverexample extends StatelessWidget {
+  const Sliverexample({super.key});
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  int index = 0;
- var screens  = [
-   // Login2(),
-   // Listview_with_builder(),
-   // ListView_Custom(),
-   // GridView1(),
- ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.purple,
-          selectedItemColor: Colors.yellow,
-          currentIndex: index,
-          onTap: (tappedindex) {
-            setState(() {
-              index = tappedindex;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: Colors.green,
+              floating: true,
+              pinned: false,
+              title: Text("sliver example"),
+              bottom: AppBar(
+                elevation: 0,
                 backgroundColor: Colors.green,
-                icon: Icon(Icons.home),
-                label: 'Home'),
-            BottomNavigationBarItem(
-                backgroundColor: Colors.red,
-                icon: Icon(Icons.search),
-                label: 'Search'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_rounded), label: 'Profile'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.add_box_rounded), label: 'create')
-          ]),
-      body:Center(
-        child: screens[index],
+                title: Container(
+                  width: double.infinity,
+                  height: 40,
+                  color: Colors.white,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "search here",
+                      prefixIcon: Icon(Icons.search),
+                      suffixIcon: Icon(Icons.camera_alt),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // SliverList(
+            //   delegate: SliverChildBuilderDelegate(
+            //     (context, index) => Container(
+            //       height: 50,
+            //       decoration: BoxDecoration(
+            //         // color: Colors.indigo,
+            //         borderRadius: BorderRadius.circular(30),
+            //       ),
+            //       child: Text("data $index"),
+            //     ),
+            //   ),
+            // ),
+            SliverGrid(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Card(
+                  color: Colors.yellow,
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      // color: Colors.indigo,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Center(
+                        child: Text(
+                      " $index",
+                      style: GoogleFonts.satisfy(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

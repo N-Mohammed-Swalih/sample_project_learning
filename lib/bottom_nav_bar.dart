@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:luminar_sample_project/stateful_login.dart';
+
+import 'grid_view.dart';
+import 'list_custom.dart';
+import 'listview_builder.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,10 +19,10 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int index = 0;
  var screens  = [
-   // Login2(),
-   // Listview_with_builder(),
-   // ListView_Custom(),
-   // GridView1(),
+   Login2(),
+   ListViewBuilder(),
+   ListViewCustom(),
+   GridView1(),
  ];
   @override
   Widget build(BuildContext context) {
