@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luminar_sample_project/passing_data_between_screens/dummy_data.dart';
 
+import 'details.dart';
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: ProductHome(),
+    routes: {
+      'details': (context) => ProductDetails(),
+    },
   ));
 }
 
@@ -27,10 +32,11 @@ class ProductHome extends StatelessWidget {
       body: ListView(
         children: productslist
             .map((iteratedproducts) => Card(
-              color: Color.fromARGB(255, 255, 239, 238),
-                    child: ListTile(
+                color: Color.fromARGB(255, 255, 239, 238),
+                child: ListTile(
+                  onTap: () => gotonextPage(context, iteratedproducts['id']),
                   leading: Container(
-                    height: 100,
+                      height: 100,
                       width: 50,
                       decoration: BoxDecoration(
                           image: DecorationImage(
@@ -43,5 +49,9 @@ class ProductHome extends StatelessWidget {
             .toList(),
       ),
     );
+  }
+
+  gotonextPage(BuildContext context, iteratedproductId) {
+    Navigator.pushNamed(context, 'details', arguments: 'iteratedproductId');
   }
 }
