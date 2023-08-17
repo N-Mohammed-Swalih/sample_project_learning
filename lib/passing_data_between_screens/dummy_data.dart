@@ -1,6 +1,6 @@
 List<Map<String,dynamic>> productslist = [
   {'id' : 1,
-   'name' :'Shoe1',
+   'name' :"Shoe1",
    'price' : '999',
    'description':'Bata Leather Shoes',
    'rating' : '4.2',

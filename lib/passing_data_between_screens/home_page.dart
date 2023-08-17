@@ -52,6 +52,6 @@ class ProductHome extends StatelessWidget {
   }
 
   gotonextPage(BuildContext context, iteratedproductId) {
-    Navigator.pushNamed(context, 'details', arguments: 'iteratedproductId');
+    Navigator.pushNamed(context, 'details', arguments: iteratedproductId);
   }
 }
