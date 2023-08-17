@@ -6,21 +6,25 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        //to collect/recieve values from previous page
-    final iteratedproductId = ModalRoute.of(context)?.settings.arguments;  
+    //to collect/recieve values from previous page
+    final iteratedproductId = ModalRoute.of(context)?.settings.arguments;
     //fetch all the values from previous page/route
-   final iteratedproductFromlist = productslist.firstWhere((element)=> element['id'] == iteratedproductId);
+    final iteratedproductFromlist = productslist
+        .firstWhere((element) => element['id'] == iteratedproductId);
     return Scaffold(
       appBar: AppBar(
         title: Text(iteratedproductFromlist['name']),
       ),
       body: Column(
         children: [
-          Container(
-            height: 300,
-            width: 300,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(iteratedproductFromlist['image']))
+          Center(
+            child: Container(
+              height: MediaQuery.of(context).size.height * .5,
+              width: MediaQuery.of(context).size.width * .5,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(iteratedproductFromlist['image']))),
             ),
           ),
         ],
