@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 
 void main() {
-  runApp(MaterialApp(home: ClipperWidget()));
+  runApp(const MaterialApp(home: ClipperWidget()));
 }
 
 class ClipperWidget extends StatelessWidget {
