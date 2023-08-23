@@ -16,11 +16,13 @@ class ExpandedandColumn extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white30,
       appBar: AppBar(
-        title:  Text("Porsche 911",
-        style: GoogleFonts.lobster(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),),
+        title: Text(
+          "Porsche 911",
+          style: GoogleFonts.lobster(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.grey[700],
         elevation: .5,
