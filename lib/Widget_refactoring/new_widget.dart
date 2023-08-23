@@ -13,9 +13,11 @@ class NewWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image(
+            fit: BoxFit.cover,
             image: myimage,
-            width: 100,
-            height: 100,
+            width: MediaQuery.of(context).size.width,
+            height: 150,
+            
           ),
           Text(name),
           Text(price),

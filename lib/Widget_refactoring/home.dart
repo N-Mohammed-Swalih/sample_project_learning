@@ -3,6 +3,7 @@ import 'new_widget.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: RefraHome(),
   ));
 }
@@ -21,18 +22,17 @@ class RefraHome extends StatelessWidget {
     "food10"
   ];
   var image = [
-    "assets/images/donut.png",
-    "assets/images/hamburger.png",
-    "assets/images/pizza.png",
-    "assets/images/ramen.png",
-    "assets/images/salad.png",
-    "assets/images/grapes.png",
-    "assets/images/mango.png",
-    "assets/images/donut.png",
-    "assets/images/hamburger.png",
-    "assets/images/pizza.png"
+    "https://images.unsplash.com/photo-1631143070457-c1aecc92abbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+    "https://images.unsplash.com/photo-1652016498875-86ca7ff6c3d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+    "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=428&q=80",
+    "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
+    "https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=778&q=80",
+    "https://images.unsplash.com/photo-1631143070457-c1aecc92abbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+    "https://images.unsplash.com/photo-1652016498875-86ca7ff6c3d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80",
+    "https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=428&q=80",
+    "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
   ];
-  var price = [250, 300, 400, 590, 120, 58, 340, 230, 100, 160];
+  var price = [250, 300, 400, 590, 120, 58, 340, 230, 160];
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,11 @@ class RefraHome extends StatelessWidget {
           gridDelegate:
           const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
-          itemCount: 10,
+          itemCount: 9,
           itemBuilder: (context, index) {
             return NewWidget(
-              myimage: AssetImage(image[index]),
+              myimage: NetworkImage(image[index],              
+              ),
               name: name[index],
               price:'${price[index]}',
             );
