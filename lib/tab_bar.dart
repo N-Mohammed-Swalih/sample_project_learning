@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:luminar_sample_project/whatsapp_ui.dart';
 
-import 'listview_builder.dart';
-
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,

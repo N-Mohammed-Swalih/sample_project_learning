@@ -7,9 +7,9 @@ import 'details.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: ProductHome(),
+    home: const ProductHome(),
     routes: {
-      'details': (context) => ProductDetails(),
+      'details': (context) =>const ProductDetails(),
     },
   ));
 }
