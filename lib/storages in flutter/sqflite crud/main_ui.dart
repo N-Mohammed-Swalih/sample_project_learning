@@ -59,6 +59,7 @@ class _ContactSqfliteState extends State<ContactSqflite> {
                 right: 15,
                 top: 15),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
                   controller: name_contrl,

@@ -20,10 +20,11 @@ class SQLHelper {
 
   //table for storing the values in this database
   static Future<void> createTable(sql.Database database) async {
-    await database.execute("""CREATE TABLE contacts(
-      id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-      cname VARCHAR,
-      cnumber VARCHAR,
-    )""");
+    await database.execute("""CREATE TABLE mycontacts(
+        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        cname TEXT,
+        cnumber TEXT,
+        createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+      )""");
   }
 }
