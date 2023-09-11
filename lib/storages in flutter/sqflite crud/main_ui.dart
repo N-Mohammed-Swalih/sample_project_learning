@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'sqflite_operatios.dart';
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -44,7 +46,7 @@ class _ContactSqfliteState extends State<ContactSqflite> {
   }
 
   final name_contrl = TextEditingController();
-  final phonr_contrl = TextEditingController();
+  final phone_contrl = TextEditingController();
   void showSheet(int? id) async {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -67,7 +69,7 @@ class _ContactSqfliteState extends State<ContactSqflite> {
                   height: 10,
                 ),
                 TextField(
-                  controller: phonr_contrl,
+                  controller: phone_contrl,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Phone Number'),
                 ),
@@ -75,10 +77,21 @@ class _ContactSqfliteState extends State<ContactSqflite> {
                   height: 10,
                 ),
                 ElevatedButton(
-                    onPressed: () {}, child: Text(id == null ? "Create Contact" : "Update"))
+                    onPressed: () async{
+                      if(id == null){
+                        await createContact();
+                      }
+                      if(id != null){
+                        // await updateContact();
+                      }
+                    }, child: Text(id == null ? "Create Contact" : "Update"))
               ],
             ),
           );
         });
+  }
+  
+  Future<void> createContact() async{
+    await SQLHelper.create_contact(name_contrl.text,phone_contrl.text);
   }
 }
