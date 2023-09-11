@@ -92,6 +92,7 @@ class _ContactSqfliteState extends State<ContactSqflite> {
   }
   
   Future<void> createContact() async{
-    await SQLHelper.create_contact(name_contrl.text,phone_contrl.text);
+  var id =  await SQLHelper.create_contact(name_contrl.text,phone_contrl.text);
+  print(id);
   }
 }

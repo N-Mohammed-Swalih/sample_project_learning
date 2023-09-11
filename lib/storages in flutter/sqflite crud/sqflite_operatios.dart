@@ -11,8 +11,11 @@ class SQLHelper {
   }
 
 //to save the name and phone number to contacts table
-  static Future<void> create_contact(String name, String phonenumber) async {
+  static Future<int> create_contact(String name, String phonenumber) async {
     final db = await SQLHelper.createDB();
+    final data = {'cname': name, 'cnumber': phonenumber};
+    final id = await db.insert('contacts', data);
+    return id;
   }
 
   //table for storing the values in this database
