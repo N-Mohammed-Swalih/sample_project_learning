@@ -21,26 +21,50 @@ class _ContactSqfliteState extends State<ContactSqflite> {
   List<Map<String, dynamic>> contacts = [];
 
   @override
+  void initState() {
+    loadui();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Contacts'),
+        title: const Text('My Contacts'),
       ),
       body: isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : ListView.builder(
               itemCount: contacts.length,
               itemBuilder: (context, index) {
                 return Card(
-                  child: ListTile(),
+                  child: ListTile(
+                    title: Text(contacts[index]['cname']),
+                    subtitle: Text(contacts[index]['cnumber']),
+                    trailing: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            updateContact(contacts[index]['id']);
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              deleteContact(contacts[index]['id']);
+                            },
+                            icon: Icon(Icons.delete))
+                      ],
+                    ),
+                  ),
                 );
               }),
       floatingActionButton: FloatingActionButton(
         //creating a new data so that the id will be null
         onPressed: () => showSheet(null),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -48,6 +72,12 @@ class _ContactSqfliteState extends State<ContactSqflite> {
   final name_contrl = TextEditingController();
   final phone_contrl = TextEditingController();
   void showSheet(int? id) async {
+    if (id != null) {
+      final existingcontact =
+          contacts.firstWhere((element) => element['id'] == id);
+      name_contrl.text = existingcontact['cname'];
+      phone_contrl.text = existingcontact['cnumber'];
+    }
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -63,37 +93,64 @@ class _ContactSqfliteState extends State<ContactSqflite> {
               children: [
                 TextField(
                   controller: name_contrl,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(), hintText: "Name"),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
                   controller: phone_contrl,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Phone Number'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
-                    onPressed: () async{
-                      if(id == null){
+                    onPressed: () async {
+                      if (id == null) {
                         await createContact();
                       }
-                      if(id != null){
+                      if (id != null) {
                         // await updateContact();
                       }
-                    }, child: Text(id == null ? "Create Contact" : "Update"))
+                      name_contrl.text = "";
+                      phone_contrl.text = "";
+                      Navigator.pop(context);
+                    },
+                    child: Text(id == null ? "Create Contact" : "Update"))
               ],
             ),
           );
         });
   }
-  
-  Future<void> createContact() async{
-  var id =  await SQLHelper.create_contact(name_contrl.text,phone_contrl.text);
-  print(id);
+
+//to add a new data or contact to sqflite db
+  Future<void> createContact() async {
+    var id =
+        await SQLHelper.create_contact(name_contrl.text, phone_contrl.text);
+    loadui(); //refresh the list each time
+  }
+
+  void loadui() async {
+    final data = await SQLHelper.readContacts();
+    setState(() {
+      contacts =
+          data; //we are performing crud in this list so it must be inside setstate
+      isLoading = false;
+    });
+  }
+
+  Future<void> updateContact(int id) async {
+    await SQLHelper.updateContact(id, name_contrl.text, phone_contrl.text);
+    loadui();
+  }
+
+  Future<void> deleteContact(int id) async {
+    await SQLHelper.deleteContact(id);
+    loadui();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Successfully Deleted")));
   }
 }

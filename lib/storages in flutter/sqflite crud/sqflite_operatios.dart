@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
 class SQLHelper {
@@ -20,11 +21,39 @@ class SQLHelper {
 
   //table for storing the values in this database
   static Future<void> createTable(sql.Database database) async {
-   await database.execute("""CREATE TABLE contacts(
+    await database.execute("""CREATE TABLE contacts(
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         cname TEXT,
         cnumber TEXT,
         createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
       )""");
+  }
+
+  //fetch or read all the contacts from db
+
+  static Future<List<Map<String, dynamic>>> readContacts() async {
+    final db = await SQLHelper.createDB();
+    return db.query('contacts', where: 'id=?');
+  }
+
+  static Future<int> updateContact(int id, String text, String text2) async {
+    final db = await SQLHelper.createDB();
+    final newdata = {
+      'cname': text,
+      'cnumber': text2,
+      'createdAt': DateTime.now().toString()
+    };
+    final upid =
+        await db.update('contacts', newdata, where: 'id=?', whereArgs: [id]);
+    return upid;
+  }
+
+  static Future<void> deleteContact(int id) async {
+    final db = await SQLHelper.createDB();
+    try {
+      await db.delete('contacts', where: 'id', whereArgs: ['id']);
+    } catch (e) {
+      throw Exception();
+    }
   }
 }
