@@ -78,22 +78,24 @@ class _ContactSqfliteState extends State<ContactSqflite> {
                   height: 10,
                 ),
                 ElevatedButton(
-                    onPressed: () async{
-                      if(id == null){
+                    onPressed: () async {
+                      if (id == null) {
                         await createContact();
                       }
-                      if(id != null){
+                      if (id != null) {
                         // await updateContact();
                       }
-                    }, child: Text(id == null ? "Create Contact" : "Update"))
+                    },
+                    child: Text(id == null ? "Create Contact" : "Update"))
               ],
             ),
           );
         });
   }
-  
-  Future<void> createContact() async{
-  var id =  await SQLHelper.create_contact(name_contrl.text,phone_contrl.text);
-  print(id);
+
+  Future<void> createContact() async {
+    var id =
+        await SQLHelper.create_contact(name_contrl.text, phone_contrl.text);
+    print(id);
   }
 }
