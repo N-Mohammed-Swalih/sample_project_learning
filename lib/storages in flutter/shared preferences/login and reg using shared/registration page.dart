@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../simple login using shared pref/shared- home.dart';
 import 'loginPage 2.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -8,9 +9,9 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  final name  = TextEditingController();
+  final name = TextEditingController();
   final uname = TextEditingController();
-  final pwd   = TextEditingController();
+  final pwd = TextEditingController();
   late SharedPreferences preferences;
 
   @override
@@ -55,6 +56,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ),
     );
   }
+
   void storedata() async {
     String personname = name.text;
     String username = uname.text;
@@ -65,6 +67,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     preferences.setString('uname', username);
     preferences.setString('pass', password);
 
-    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Login2()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => SharedHome()));
   }
 }
