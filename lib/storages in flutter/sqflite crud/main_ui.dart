@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
+
 import 'sqflite_operatios.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: SqfliteHome(),
+    debugShowCheckedModeBanner: false,
+    home: ContactSqflite(),
   ));
 }
 
-class SqfliteHome extends StatefulWidget {
+class ContactSqflite extends StatefulWidget {
+  ContactSqflite({super.key});
+
   @override
-  State<SqfliteHome> createState() => _SqfliteHomeState();
+  State<ContactSqflite> createState() => _ContactSqfliteState();
 }
 
-class _SqfliteHomeState extends State<SqfliteHome> {
+class _ContactSqfliteState extends State<ContactSqflite> {
   var isLoading = true;
-
-  //to read all the values from sqflite db
   List<Map<String, dynamic>> contacts = [];
 
   @override
   void initState() {
-    loadUi();
+    loadui();
     super.initState();
   }
 
@@ -28,25 +30,27 @@ class _SqfliteHomeState extends State<SqfliteHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("MyContacts"),
+        title: const Text('My Contacts'),
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
           : ListView.builder(
               itemCount: contacts.length,
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
                     title: Text(contacts[index]['cname']),
-                    // accessing single map from a list
                     subtitle: Text(contacts[index]['cnumber']),
-                    trailing: Wrap(
+                    trailing: Row(
                       children: [
                         IconButton(
-                            onPressed: () {
-                              showSheet(contacts[index]['id']);
-                            },
-                            icon: Icon(Icons.edit)),
+                          onPressed: () {
+                            updateContact(contacts[index]['id']);
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
                         IconButton(
                             onPressed: () {
                               deleteContact(contacts[index]['id']);
@@ -58,38 +62,37 @@ class _SqfliteHomeState extends State<SqfliteHome> {
                 );
               }),
       floatingActionButton: FloatingActionButton(
-        // creating a new data so the id will be null
+        //creating a new data so that the id will be null
         onPressed: () => showSheet(null),
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  final name_cntrl = TextEditingController();
-  final phone_cntrl = TextEditingController();
-
+  final name_contrl = TextEditingController();
+  final phone_contrl = TextEditingController();
   void showSheet(int? id) async {
     if (id != null) {
       final existingcontact =
           contacts.firstWhere((element) => element['id'] == id);
-      name_cntrl.text = existingcontact['cname'];
-      phone_cntrl.text = existingcontact['cnumber'];
+      name_contrl.text = existingcontact['cname'];
+      phone_contrl.text = existingcontact['cnumber'];
     }
     showModalBottomSheet(
-        context: context,
         isScrollControlled: true,
+        context: context,
         builder: (context) {
           return Container(
             padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 100,
                 left: 15,
                 right: 15,
-                top: 15,
-                bottom: MediaQuery.of(context).viewInsets.bottom + 120),
+                top: 15),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  controller: name_cntrl,
+                  controller: name_contrl,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), hintText: "Name"),
                 ),
@@ -97,9 +100,9 @@ class _SqfliteHomeState extends State<SqfliteHome> {
                   height: 10,
                 ),
                 TextField(
-                  controller: phone_cntrl,
+                  controller: phone_contrl,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Phone Number"),
+                      border: OutlineInputBorder(), hintText: 'Phone Number'),
                 ),
                 const SizedBox(
                   height: 10,
@@ -110,14 +113,13 @@ class _SqfliteHomeState extends State<SqfliteHome> {
                         await createContact();
                       }
                       if (id != null) {
-                        await updateContact(id);
+                        // await updateContact();
                       }
-                      name_cntrl.text = "";
-                      phone_cntrl.text = "";
+                      name_contrl.text = "";
+                      phone_contrl.text = "";
                       Navigator.pop(context);
                     },
-                    child:
-                        Text(id == null ? "Create Contact" : "Update Contact"))
+                    child: Text(id == null ? "Create Contact" : "Update"))
               ],
             ),
           );
@@ -126,28 +128,29 @@ class _SqfliteHomeState extends State<SqfliteHome> {
 
 //to add a new data or contact to sqflite db
   Future<void> createContact() async {
-    await SQLHelper.create_contact(name_cntrl.text, phone_cntrl.text);
-    loadUi(); // refresh list each time
+    var id =
+        await SQLHelper.create_contact(name_contrl.text, phone_contrl.text);
+    loadui(); //refresh the list each time
   }
 
-  void loadUi() async {
+  void loadui() async {
     final data = await SQLHelper.readContacts();
     setState(() {
       contacts =
-          data; // we are performing crud in this list so it must be inside setstate
+          data; //we are performing crud in this list so it must be inside setstate
       isLoading = false;
     });
   }
 
   Future<void> updateContact(int id) async {
-    await SQLHelper.updateContact(id, name_cntrl.text, phone_cntrl.text);
-    loadUi();
+    await SQLHelper.updateContact(id, name_contrl.text, phone_contrl.text);
+    loadui();
   }
 
   Future<void> deleteContact(int id) async {
     await SQLHelper.deleteContact(id);
-    loadUi();
+    loadui();
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("Succesfully Deleted")));
+        .showSnackBar(SnackBar(content: Text("Successfully Deleted")));
   }
 }
