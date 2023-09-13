@@ -37,7 +37,7 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   fluttertoast: ^8.2.2
   carousel_slider:
-  webview_flutter: ^4.2.2
+  # webview_flutter: ^4.2.2
   rive: ^0.11.14
   introduction_screen:
   readmore:
