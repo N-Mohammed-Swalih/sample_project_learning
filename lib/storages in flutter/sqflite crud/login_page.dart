@@ -171,7 +171,7 @@ class _LoginPageSqState extends State<LoginPageSq> {
       var data = await SQLHelperAssignment.CheckLogin(username, password);
       if (data.isNotEmpty) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+            context, MaterialPageRoute(builder: (context) => WelcomePage()));
         print("Login Success");
       } else if (data.isEmpty) {
         Navigator.pushReplacement(
