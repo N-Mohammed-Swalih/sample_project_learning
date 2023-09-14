@@ -23,7 +23,8 @@ class SQLHelperAssignment {
     final id = await db.insert('users', data);
     return id;
   }
- //to create a table
+
+  //to create a table
   static Future<void> createTable(sql.Database database) async {
     await database.execute("""CREATE TABLE users(
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -32,5 +33,16 @@ class SQLHelperAssignment {
         phone TEXT,
         pass TEXT
       )""");
+  }
+
+  static Future<List<Map>> CheckLogin(String username, String password) async {
+    final db = await SQLHelperAssignment.createDB();
+    final data = await db.rawQuery(
+        "SELECT * FROM users WHERE accmail = '$username' AND pass = '$password'");
+    print(data.toString());
+    if (data.isNotEmpty) {
+      return data;
+    }
+    return data;
   }
 }
