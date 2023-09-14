@@ -164,7 +164,7 @@ class _LoginPageSqState extends State<LoginPageSq> {
   }
 
   void loginUser(String username, String password) async {
-    if (username == 'admin@gmail.com' && password == '123456') {
+    if (username == 'admin@gmail.com' && password == '12345677') {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => WelcomePage()));
     } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luminar_sample_project/storages%20in%20flutter/sqflite%20crud/welcome_page.dart';
 
 import 'sql_helper.dart';
 
@@ -98,7 +99,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   ),
                                   onPressed: () async {
                                     await createAccount();
-                                    
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WelcomePage()));
                                   },
                                   child: Text("Sign-Up"),
                                 ),
@@ -117,6 +118,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Future<void> createAccount() async {
     var id = await SQLHelperAssignment.create_user(name_contrl.text,
         phone_contrl.text, email_contrl.text, password_contrl.text);
-        print("success");
+        print(id);
   }
 }
