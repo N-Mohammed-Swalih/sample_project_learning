@@ -35,10 +35,10 @@ class SQLHelperAssignment {
       )""");
   }
 
-  static Future<List<Map>> CheckLogin(String username, String password) async {
+  static Future<List<Map>> CheckLogin(String email, String password) async {
     final db = await SQLHelperAssignment.createDB();
-final data = await db.rawQuery(
-    "SELECT * FROM users WHERE accmail= '$username' AND pass = '$password' ");
+    final data = await db.rawQuery(
+        "SELECT * FROM users WHERE accmail= '$email' AND pass= '$password' ");
     print(data.toString());
     if (data.isNotEmpty) {
       return data;

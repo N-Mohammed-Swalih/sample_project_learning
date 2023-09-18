@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../registration_page.dart';
+import 'package:luminar_sample_project/storages%20in%20flutter/Crud_sqflite_login_registration/registration_page.dart';
 import 'login_page.dart';
 
 void main() {
@@ -38,7 +38,8 @@ class WelcomePage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          backgroundColor: const Color.fromARGB(255, 59, 17, 14)),
+                          backgroundColor:
+                              const Color.fromARGB(255, 59, 17, 14)),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => LoginPageSq()));

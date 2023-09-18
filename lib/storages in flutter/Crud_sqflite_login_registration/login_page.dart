@@ -136,10 +136,8 @@ class _LoginPageSqState extends State<LoginPageSq> {
                                     final valid =
                                         formkey.currentState!.validate();
                                     if (valid) {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WelcomePage()));
+                                      loginUser(usercontroller.text,
+                                          passcontroller.text);
                                     } else {
                                       Fluttertoast.showToast(
                                           msg: "Invalid Username or Password",
@@ -150,8 +148,6 @@ class _LoginPageSqState extends State<LoginPageSq> {
                                           textColor: Colors.white,
                                           fontSize: 16.0);
                                     }
-                                    loginUser(usercontroller.text,
-                                        passcontroller.text);
                                   },
                                   child: const Text("Login"),
                                 ),
@@ -167,6 +163,7 @@ class _LoginPageSqState extends State<LoginPageSq> {
           context, MaterialPageRoute(builder: (context) => WelcomePage()));
     } else {
       var data = await SQLHelperAssignment.CheckLogin(username, password);
+      print(data);
       if (data.isNotEmpty) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => WelcomePage()));
