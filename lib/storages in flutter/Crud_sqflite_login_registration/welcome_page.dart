@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luminar_sample_project/storages%20in%20flutter/sqflite%20crud/registration_page.dart';
-
+import '../../registration_page.dart';
 import 'login_page.dart';
 
 void main() {

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:luminar_sample_project/Mediaquery/home.dart';
-import 'package:luminar_sample_project/storages%20in%20flutter/sqflite%20crud/main_ui.dart';
-import 'package:luminar_sample_project/storages%20in%20flutter/sqflite%20crud/welcome_page.dart';
 
 import 'sql_helper.dart';
+import 'welcome_page.dart';
 
 class LoginPageSq extends StatefulWidget {
   LoginPageSq({super.key});
@@ -26,15 +24,15 @@ class _LoginPageSqState extends State<LoginPageSq> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         body: Center(
             child: Form(
                 key: formkey,
                 child: Container(
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                          fit: BoxFit.cover,
-                          opacity: 0.7,
+                          fit: BoxFit.fill,
+                          opacity: 0.9,
                           image: NetworkImage(
                               "https://images.pexels.com/photos/4110250/pexels-photo-4110250.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")),
                     ),
