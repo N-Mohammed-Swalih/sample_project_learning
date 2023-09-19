@@ -44,6 +44,7 @@ class _HiveOperationsState extends State<HiveOperations> {
                     title: Text(mytask['taskname']),
                     subtitle: Text(mytask['taskcontent']),
                     trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
                           onPressed: () {},
@@ -102,7 +103,7 @@ class _HiveOperationsState extends State<HiveOperations> {
                     onPressed: () {
                       if (task_controller.text != "" &&
                           content_controller.text != "") {
-                        if (itemkey != null) {
+                        if (itemkey == null) {
                           createTask({
                             'id': itemkey,
                             'name': task_controller.text.trim(),
