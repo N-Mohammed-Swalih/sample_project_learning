@@ -9,7 +9,7 @@ void main() {
     debugShowCheckedModeBanner: false,
     home: const ProductHome(),
     routes: {
-      'details': (context) =>const ProductDetails(),
+      'details': (context) => const ProductDetails(),
     },
   ));
 }
@@ -51,7 +51,7 @@ class ProductHome extends StatelessWidget {
     );
   }
 
-  gotonextPage(BuildContext context, iteratedproductId) {
+ void gotonextPage(BuildContext context, iteratedproductId) {
     Navigator.pushNamed(context, 'details', arguments: iteratedproductId);
   }
 }

@@ -47,7 +47,9 @@ class _HiveOperationsState extends State<HiveOperations> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showTask(context, mytask["id"]);
+                          },
                           icon: const Icon(Icons.edit),
                         ),
                         IconButton(
@@ -67,6 +69,13 @@ class _HiveOperationsState extends State<HiveOperations> {
   }
 
   void showTask(BuildContext context, int? itemkey) {
+    if (itemkey != null) {
+      final existingTask =
+          task.firstWhere((element) => element['id'] == itemkey);
+      task_controller.text = existingTask['taskname'];
+      content_controller.text = existingTask['taskcontent'];
+    }
+    //itemkey is similar to id in sqflite
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
