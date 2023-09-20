@@ -6,6 +6,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('to_do_app Box');
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: HiveOperations(),
   ));
 }
@@ -53,7 +54,10 @@ class _HiveOperationsState extends State<HiveOperations> {
                           icon: const Icon(Icons.edit),
                         ),
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.delete))
+                            onPressed: () {
+                              deletetask(mytask["id"]);
+                            },
+                            icon: const Icon(Icons.delete))
                       ],
                     ),
                   ),
@@ -143,7 +147,10 @@ class _HiveOperationsState extends State<HiveOperations> {
   }
 
   Future<void> updateTasks(
-      int? itemkey, Map<String, dynamic> updatetask) async {}
+      int? itemkey, Map<String, dynamic> updatetask) async {
+    await mybox.put(itemkey, updatetask);
+    load_or_read_Task();
+  }
 
   void load_or_read_Task() {
     final task_from_hive = mybox.keys.map((key) {
@@ -157,5 +164,12 @@ class _HiveOperationsState extends State<HiveOperations> {
     setState(() {
       task = task_from_hive.reversed.toList();
     });
+  }
+
+  Future<void> deletetask(int itemkey) async {
+    await mybox.delete(itemkey);
+    load_or_read_Task();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("Deleted Successfully")));
   }
 }
