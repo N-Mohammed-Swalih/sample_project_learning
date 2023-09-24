@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:luminar_sample_project/Mediaquery/home.dart';
+import '../database/hive_db.dart';
 import '../models/user_model.dart';
 import 'registration_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
+  // await Hive.initFlutter();
   // Hive.registerAdapter();
   await Hive.openBox<User>('userData');
   runApp(MaterialApp(home: LoginPageScreen()));
@@ -44,7 +47,12 @@ class LoginPageScreen extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          ElevatedButton(onPressed: () {}, child: const Text("Login")),
+          ElevatedButton(
+              onPressed: () async {
+                final userList = await HiveDb.instance.getUser();
+                checkLogin(context, userList);
+              },
+              child: const Text("Login")),
           const SizedBox(
             height: 10,
           ),
@@ -59,5 +67,20 @@ class LoginPageScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> checkLogin(BuildContext context, List<User> userList) async {
+    final userlogin = username_controller.text.trim();
+    final userpass = password_controller.text.trim();
+    if (userlogin != "" && userpass != "") {
+      await Future.forEach(userList, (singleuser) {
+        if (singleuser.email == userlogin && singleuser.password == userpass) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: ((context) => HomePage())));
+        } else {
+          Get.snackbar('Hey', "Invalid User");
+        }
+      });
+    }
   }
 }
