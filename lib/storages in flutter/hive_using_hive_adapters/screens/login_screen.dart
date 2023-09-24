@@ -9,7 +9,7 @@ import 'registration_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Hive.initFlutter();
+  await Hive.initFlutter();
   // Hive.registerAdapter();
   await Hive.openBox<User>('userData');
   runApp(GetMaterialApp(home: LoginPageScreen()));
