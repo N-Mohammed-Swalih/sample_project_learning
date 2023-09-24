@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:luminar_sample_project/Mediaquery/home.dart';
 import '../database/hive_db.dart';
 import '../models/user_model.dart';
+import 'home_page.dart';
 import 'registration_page.dart';
 
 void main() async {
@@ -11,7 +12,7 @@ void main() async {
   // await Hive.initFlutter();
   // Hive.registerAdapter();
   await Hive.openBox<User>('userData');
-  runApp(MaterialApp(home: LoginPageScreen()));
+  runApp(GetMaterialApp(home: LoginPageScreen()));
 }
 
 class LoginPageScreen extends StatelessWidget {
@@ -75,8 +76,8 @@ class LoginPageScreen extends StatelessWidget {
     if (userlogin != "" && userpass != "") {
       await Future.forEach(userList, (singleuser) {
         if (singleuser.email == userlogin && singleuser.password == userpass) {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: ((context) => HomePage())));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: ((context) => HomePageForHive())));
         } else {
           Get.snackbar('Hey', "Invalid User");
         }
