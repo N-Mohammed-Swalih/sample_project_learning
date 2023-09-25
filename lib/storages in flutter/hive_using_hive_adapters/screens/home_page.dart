@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class HomePageForHive extends StatelessWidget {
-  const HomePageForHive({super.key});
+  String? email;
+  HomePageForHive({this.email});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Welcome $email"),
+      ),
       backgroundColor: Colors.amber,
     );
   }

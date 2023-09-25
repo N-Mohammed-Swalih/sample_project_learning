@@ -73,11 +73,17 @@ class LoginPageScreen extends StatelessWidget {
   Future<void> checkLogin(BuildContext context, List<User> userList) async {
     final userlogin = username_controller.text.trim();
     final userpass = password_controller.text.trim();
+    bool userFound = false;
     if (userlogin != "" && userpass != "") {
       await Future.forEach(userList, (singleuser) {
         if (singleuser.email == userlogin && singleuser.password == userpass) {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: ((context) => HomePageForHive())));
+          userFound = true;
+        } else {
+          userFound = false;
+        }
+        if (userFound = true) {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: ((context) => HomePageForHive(email: userlogin))));
         } else {
           Get.snackbar('Hey', "Invalid User");
         }
