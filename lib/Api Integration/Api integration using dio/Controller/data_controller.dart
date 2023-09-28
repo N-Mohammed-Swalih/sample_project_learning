@@ -29,7 +29,7 @@ class DataController extends GetxController {
         datas.add(ListModel.fromJson(element));
       });
       isLoading.value = false;
-    }
+    } else {}
   }
   //scroll listview to down
 
