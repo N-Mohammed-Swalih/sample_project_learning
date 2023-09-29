@@ -12,6 +12,7 @@ import 'details_data.dart';
 
 void main() {
   runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
     home: DataHome(),
   ));
 }
