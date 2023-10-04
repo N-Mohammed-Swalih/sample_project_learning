@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "34070684426",
+    "project_id": "movieapp-b8922",
+    "storage_bucket": "movieapp-b8922.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34070684426:android:9d31a348611f77ac2850f3",
+        "android_client_info": {
+          "package_name": "com.example.luminar_sample_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArQhnCtbxSTu_junHErdh5NyT7iZaPHGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
