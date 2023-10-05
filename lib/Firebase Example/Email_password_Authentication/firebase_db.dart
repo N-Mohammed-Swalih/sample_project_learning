@@ -5,7 +5,7 @@ class FirebaseHelper {
   get User => auth.currentUser;
 
 //register user
- static Future<String?> register(
+   Future<String?> register(
       {required String email, required String password}) async {
     try {
       final credential =
@@ -13,6 +13,17 @@ class FirebaseHelper {
         email: email,
         password: password,
       );
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
+
+//login user
+  Future<String?> login(
+      {required String email, required String password}) async {
+    try {
+      await auth.signInWithEmailAndPassword(email: email, password: password);
       return null;
     } on FirebaseAuthException catch (e) {
       return e.message;

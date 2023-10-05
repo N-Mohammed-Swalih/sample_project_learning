@@ -40,17 +40,18 @@ class _RegistrationFirebaseState extends State<RegistrationFirebase> {
             onPressed: () {
               String email = username_controller.text.trim();
               String password = password_controller.text.trim();
-              FirebaseHelper.register(email: email, password: password)
+              FirebaseHelper()
+                  .register(email: email, password: password)
                   .then((result) {
                 if (result == null) {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginFirebase()));
                 } else {
-                  Get.snackbar('Error', 'Login Failed');
+                  Get.snackbar('Error', 'Registration Failed');
                 }
               });
             },
-            child: Text("Login"),
+            child: Text("Register"),
           ),
         ]));
   }

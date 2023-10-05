@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:luminar_sample_project/Firebase%20Example/Email_password_Authentication/firebase_db.dart';
 
 import '../home_firebase.dart';
 
@@ -47,7 +49,24 @@ class _LoginFirebaseState extends State<LoginFirebase> {
               controller: login_password_controller,
             ),
           ),
-          ElevatedButton(onPressed: () {}, child: const Text('Login')),
+          ElevatedButton(
+              onPressed: () {
+                String email = login_username_controller.text.trim();
+                String password = login_password_controller.text.trim();
+                FirebaseHelper()
+                    .login(email: email, password: password)
+                    .then((value) => ((result) {
+                          if (result == null) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomeFirebase()));
+                          } else {
+                            Get.snackbar('Error', "Login Failed");
+                          }
+                        }));
+              },
+              child: const Text('Login')),
           SizedBox(
             height: 30,
           ),
