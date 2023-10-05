@@ -50,6 +50,10 @@ dependencies:
   email_validator: ^2.1.17
   cached_network_image:
 
+  #firebase authentication plugins:
+  firebase_core:
+  firebase_auth: ^4.10.1
+
 
   #api integration using dio
   dio: ^5.3.3
