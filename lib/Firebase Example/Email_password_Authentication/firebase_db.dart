@@ -30,3 +30,9 @@ class FirebaseHelper {
     }
   }
 }
+
+//logout
+
+Future<void> Signout()  async{
+  await FirebaseAuth.instance.signOut();
+ }
