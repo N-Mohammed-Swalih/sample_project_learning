@@ -9,11 +9,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(
-    apiKey: "AIzaSyDiq7-WCnuL3BMWaydX34c4y3S2dKEN9qc",
-    projectId: "famous-smithy-394706",
-    appId: '1:228270350036:android:9b5491946414627eb5e541',
+    apiKey: "AIzaSyDt-fGL6T4paXZy5aCH_XLPqRSkqhMN9ZU",
+    projectId: "movieapp-b8922",
+    appId: '1:34070684426:android:9d31a348611f77ac2850f3',
     messagingSenderId: '',
-    storageBucket: "famous-smithy-394706.appspot.com",
+    storageBucket: "movieapp-b8922.appspot.com",
   ));
   runApp(MaterialApp(
     home: FireMediaStorage(),
@@ -60,7 +60,26 @@ class _FireMediaStorageState extends State {
                       if (snapshot.connectionState == ConnectionState.done) {
                         return ListView.builder(
                             itemCount: snapshot.data?.length ?? 0,
-                            itemBuilder: (context, index) {});
+                            itemBuilder: (context, index) {
+                              final Map<String, dynamic> image =
+                                  snapshot.data![index];
+                              //each map value from list images stored in map image
+                              return Card(
+                                child: ListTile(
+                                  leading: Image.network(image['imageurl']),
+                                  title: Text(image['uploadedBy']),
+                                  subtitle: Text(image['description']),
+                                  trailing: IconButton(
+                                      onPressed: () =>
+                                          deletaData(image['path']),
+                                      icon: Icon(Icons.delete)),
+                                ),
+                              );
+                            });
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
                       }
                     }))
           ],
@@ -97,6 +116,7 @@ class _FireMediaStorageState extends State {
     }
   }
 
+//load the data from firebase
   Future<List<Map<String, dynamic>>> loadData() async {
     List<Map<String, dynamic>> images = [];
     final ListResult result = await storage.ref().list();
@@ -118,5 +138,10 @@ class _FireMediaStorageState extends State {
       });
     });
     return images;
+  }
+
+  Future<void> deletaData(String imagepath) async {
+    await storage.ref().delete();
+    setState(() {});
   }
 }
