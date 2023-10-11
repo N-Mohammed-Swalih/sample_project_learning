@@ -141,7 +141,7 @@ class _FireMediaStorageState extends State {
   }
 
   Future<void> deletaData(String imagepath) async {
-    await storage.ref().delete();
+    await storage.ref(imagepath).delete();
     setState(() {});
   }
 }
