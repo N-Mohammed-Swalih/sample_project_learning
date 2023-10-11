@@ -3,16 +3,23 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:luminar_sample_project/Firebase%20Example/Email_password_Authentication/firebase_db.dart';
+import 'package:luminar_sample_project/home.dart';
 
 import '../home_firebase.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  User? user = FirebaseAuth.instance.currentUser;
-  runApp(MaterialApp(
-    home: user == null ? LoginFirebase() : HomeFirebase(),
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+    apiKey: "AIzaSyDt-fGL6T4paXZy5aCH_XLPqRSkqhMN9ZU",
+    projectId: "movieapp-b8922",
+    appId: '1:34070684426:android:9d31a348611f77ac2850f3',
+    messagingSenderId: '',
+    storageBucket: "movieapp-b8922.appspot.com",
   ));
+  // to get the currently logined in user
+  User? user = FirebaseAuth.instance.currentUser;
+  runApp(MaterialApp(home: user == null ? LoginFirebase() : HomeFire()));
 }
 
 class LoginFirebase extends StatefulWidget {
@@ -60,7 +67,7 @@ class _LoginFirebaseState extends State<LoginFirebase> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomeFirebase()));
+                                    builder: (context) => HomeFire()));
                           } else {
                             Get.snackbar('Error', "Login Failed");
                           }

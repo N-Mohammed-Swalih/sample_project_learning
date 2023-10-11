@@ -5,7 +5,7 @@ class FirebaseHelper {
   get User => auth.currentUser;
 
 //register user
-   Future<String?> register(
+  Future<String?> register(
       {required String email, required String password}) async {
     try {
       final credential =
@@ -29,10 +29,10 @@ class FirebaseHelper {
       return e.message;
     }
   }
-}
 
 //logout
 
-Future<void> Signout()  async{
-  await FirebaseAuth.instance.signOut();
- }
+  Future<void> Signout() async {
+    await FirebaseAuth.instance.signOut();
+  }
+}
