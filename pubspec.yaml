@@ -53,6 +53,9 @@ dependencies:
   #firebase authentication plugins:
   firebase_core:
   firebase_auth: ^4.10.1
+  firebase_storage: ^11.2.8
+  image_picker: ^1.0.4
+  path:
 
 
   #api integration using dio
