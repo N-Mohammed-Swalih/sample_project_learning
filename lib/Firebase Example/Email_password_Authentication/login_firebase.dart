@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:luminar_sample_project/Firebase%20Example/Email_password_Authentication/firebase_db.dart';
-import 'package:luminar_sample_project/home.dart';
 
 import '../home_firebase.dart';
 
