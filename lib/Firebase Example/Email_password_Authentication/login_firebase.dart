@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:luminar_sample_project/Firebase%20Example/Email_password_Authentication/firebase_db.dart';
+import 'package:luminar_sample_project/Firebase%20Example/Email_password_Authentication/registration_fir.dart';
 
 import '../home_firebase.dart';
 
@@ -18,66 +18,66 @@ void main() async {
   ));
   // to get the currently logined in user
   User? user = FirebaseAuth.instance.currentUser;
-  runApp(MaterialApp(home: user == null ? LoginFirebase() : HomeFire()));
+  runApp(MaterialApp(home: user == null ? LoginFire() : HomeFire()));
 }
 
-class LoginFirebase extends StatefulWidget {
-  const LoginFirebase({super.key});
+class LoginFire extends StatefulWidget {
+  const LoginFire({super.key});
 
   @override
-  State<LoginFirebase> createState() => _LoginFirebaseState();
+  State<LoginFire> createState() => _LoginFireState();
 }
 
-class _LoginFirebaseState extends State<LoginFirebase> {
-  final login_username_controller = TextEditingController();
-  final login_password_controller = TextEditingController();
+class _LoginFireState extends State<LoginFire> {
+  final email = TextEditingController();
+  final pass = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text("Registration"),
-      ),
+      appBar: AppBar(title: const Text("Login")),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15.0),
             child: TextField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: "Username"),
-              controller: login_username_controller,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: "UserName"),
+              controller: email,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15.0),
             child: TextField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: "Password"),
-              controller: login_password_controller,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: "PassWord"),
+              controller: pass,
             ),
           ),
           ElevatedButton(
               onPressed: () {
-                String email = login_username_controller.text.trim();
-                String password = login_password_controller.text.trim();
+                String mail = email.text.trim();
+                String pwd = pass.text.trim();
+
                 FirebaseHelper()
-                    .login(email: email, password: password)
-                    .then((value) => ((result) {
-                          if (result == null) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeFire()));
-                          } else {
-                            Get.snackbar('Error', "Login Failed");
-                          }
-                        }));
+                    .signIn(email: mail, password: pwd)
+                    .then((result) {
+                  if (result == null) {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => HomeFire()));
+                  } else {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(result)));
+                  }
+                });
               },
               child: const Text('Login')),
-          SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(onPressed: () {}, child: const Text('Register Here'))
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Register_fire()));
+              },
+              child: Text("Not a user ? register here!!"))
         ],
       ),
     );

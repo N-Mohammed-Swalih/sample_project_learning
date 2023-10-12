@@ -2,14 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseHelper {
   final FirebaseAuth auth = FirebaseAuth.instance;
-  get User => auth.currentUser;
 
-//register user
-  Future<String?> register(
+  get user => auth.currentUser;
+
+  //Signup
+  Future<String?> signUp(
       {required String email, required String password}) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -19,8 +19,8 @@ class FirebaseHelper {
     }
   }
 
-//login user
-  Future<String?> login(
+  //SignIn
+  Future<String?> signIn(
       {required String email, required String password}) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
@@ -30,9 +30,8 @@ class FirebaseHelper {
     }
   }
 
-//logout
-
-  Future<void> Signout() async {
-    await FirebaseAuth.instance.signOut();
+  //Sign
+  Future<void> signOut() async {
+    await auth.signOut();
   }
 }

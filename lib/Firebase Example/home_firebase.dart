@@ -10,9 +10,9 @@ class HomeFire extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
             onPressed: () {
-              FirebaseHelper().Signout().then((result) => Navigator.push(
+              FirebaseHelper().signOut().then((result) => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginFirebase())));
+                  MaterialPageRoute(builder: (context) => LoginFire())));
             },
             child: Text("SignOut")),
       ),

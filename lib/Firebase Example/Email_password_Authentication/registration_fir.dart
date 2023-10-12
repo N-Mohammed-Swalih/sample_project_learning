@@ -1,58 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:luminar_sample_project/Firebase%20Example/Email_password_Authentication/firebase_db.dart';
 import 'package:luminar_sample_project/Firebase%20Example/Email_password_Authentication/login_firebase.dart';
 
-class RegistrationFirebase extends StatefulWidget {
-  const RegistrationFirebase({super.key});
+import 'firebase_db.dart';
 
+class Register_fire extends StatefulWidget {
   @override
-  State<RegistrationFirebase> createState() => _RegistrationFirebaseState();
+  State<Register_fire> createState() => _RegistrationFireState();
 }
 
-class _RegistrationFirebaseState extends State<RegistrationFirebase> {
-  final username_controller = TextEditingController();
-  final password_controller = TextEditingController();
+class _RegistrationFireState extends State<Register_fire> {
+  final email = TextEditingController();
+  final pass = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Registration"),
-        ),
-        body: Column(children: [
+      appBar: AppBar(title: Text("Registration")),
+      body: Column(
+        children: [
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15.0),
             child: TextField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: "Username"),
-              controller: username_controller,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: "UserName"),
+              controller: email,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15.0),
             child: TextField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: "Password"),
-              controller: password_controller,
+              controller: pass,
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              String email = username_controller.text.trim();
-              String password = password_controller.text.trim();
-              FirebaseHelper()
-                  .register(email: email, password: password)
-                  .then((result) {
-                if (result == null) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginFirebase()));
-                } else {
-                  Get.snackbar('Error', 'Registration Failed');
-                }
-              });
-            },
-            child: Text("Register"),
-          ),
-        ]));
+              onPressed: () {
+                String mail = email.text.trim();
+                String pwd = pass.text.trim();
+
+                FirebaseHelper()
+                    .signUp(email: mail, password: pwd)
+                    .then((result) {
+                  if (result == null) {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginFire()));
+                  } else {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(result)));
+                  }
+                });
+              },
+              child: Text('Register'))
+        ],
+      ),
+    );
   }
 }

@@ -3,6 +3,12 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+void main() {
+  runApp(GetMaterialApp(
+    home: CheckPermission(),
+  ));
+}
+
 class CheckPermission extends StatefulWidget {
   @override
   State<CheckPermission> createState() => _CheckPermissionState();

@@ -12,7 +12,20 @@
           "package_name": "com.example.luminar_sample_project"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "34070684426-2ncq405n39logtkodh2kaq5ahvj3h5f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.luminar_sample_project",
+            "certificate_hash": "71fe29c401861ae2cd6b20a6afc971cc995f00d7"
+          }
+        },
+        {
+          "client_id": "34070684426-pr40pqtq5gijpjf0j1f3cbl8292cj95n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyArQhnCtbxSTu_junHErdh5NyT7iZaPHGg"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34070684426-pr40pqtq5gijpjf0j1f3cbl8292cj95n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
