@@ -6,12 +6,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: "AIzaSyDiq7-WCnuL3BMWaydX34c4y3S2dKEN9qc",
-        projectId: "famous-smithy-394706",
-        appId: '1:228270350036:android:9b5491946414627eb5e541',
-        messagingSenderId: '',
-        storageBucket: "famous-smithy-394706.appspot.com",
-      ));  runApp(MyApp());
+    apiKey: "AIzaSyDt-fGL6T4paXZy5aCH_XLPqRSkqhMN9ZU",
+    projectId: "movieapp-b8922",
+    appId: '1:34070684426:android:9d31a348611f77ac2850f3',
+    messagingSenderId: '',
+    storageBucket: "movieapp-b8922.appspot.com",
+  ));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
