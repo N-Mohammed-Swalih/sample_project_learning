@@ -29,14 +29,14 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Flexible(
                       flex: 1,
-                      child: Image.network(
-                        'https://www.gstatic.com/devrel-devsite/prod/vbc75fa051dd9e107a8ce8cc1f77e4f700bcffa15e6da6ad5305464a1ca4637b5/firebase/images/lockup.svg',
+                      child: Image.asset(
+                        "",
                         height: 160,
                       ),
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'FlutterFire',
+                      'Google Sign-in',
                       style: TextStyle(
                         fontSize: 40,
                       ),

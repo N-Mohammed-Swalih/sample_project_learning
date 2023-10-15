@@ -7,13 +7,13 @@ class AppBarTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
+        Image.network(
           'assets/firebase_logo.png',
           height: 20,
         ),
         const SizedBox(width: 8),
         const Text(
-          'FlutterFire',
+          'Google Sign-in',
           style: TextStyle(
             fontSize: 18,
           ),
