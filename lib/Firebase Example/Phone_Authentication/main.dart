@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: LoginScreen(),
       debugShowCheckedModeBanner: false,
-      color: Colors.indigo[900],
+      color: Colors.red[900],
     );
   }
 }

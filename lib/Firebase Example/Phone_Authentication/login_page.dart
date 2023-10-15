@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,23 +22,38 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Phone Auth",
+        title: const Text(
+          "Phone Authentication",
           style: TextStyle(
             fontSize: 30,
           ),
         ),
-        backgroundColor: Colors.indigo[900],
+        backgroundColor: Colors.red[900],
       ),
       body: Container(
         margin: EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              "assets/images/red_login.png",
+              height: 200,
+              width: 200,
+            ),
+            Text(
+              "Login With Otp",
+              style: TextStyle(
+                  color: Colors.red[900],
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 100,
+            ),
             TextField(
               controller: phoneController,
-              decoration: InputDecoration(
-                hintText: 'Phone Number',
+              decoration: const InputDecoration(
+                hintText: 'Enter Your Phone Number',
                 prefix: Padding(
                   padding: EdgeInsets.all(4),
                   child: Text('+91'),
@@ -47,37 +63,43 @@ class _LoginScreenState extends State<LoginScreen> {
               keyboardType: TextInputType.phone,
             ),
             Visibility(
+              visible: otpVisibility,
               child: TextField(
                 controller: otpController,
-                decoration: InputDecoration(
-                  hintText: 'OTP',
+                decoration: const InputDecoration(
+                  hintText: 'Enter Your OTP Here',
                   prefix: Padding(
-                    padding: EdgeInsets.all(4),
+                    padding: EdgeInsets.all(10),
                     child: Text(''),
                   ),
                 ),
                 maxLength: 6,
                 keyboardType: TextInputType.number,
               ),
-              visible: otpVisibility,
             ),
-            SizedBox(
-              height: 10,
+            const SizedBox(
+              height: 40,
             ),
-            MaterialButton(
-              color: Colors.indigo[900],
-              onPressed: () {
-                if (otpVisibility) {
-                  verifyOTP();
-                } else {
-                  loginWithPhone();
-                }
-              },
-              child: Text(
-                otpVisibility ? "Verify" : "Login",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+            Container(
+              height: 40,
+              width: 120,
+              child: MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                color: Colors.red[900],
+                onPressed: () {
+                  if (otpVisibility) {
+                    verifyOTP();
+                  } else {
+                    loginWithPhone();
+                  }
+                },
+                child: Text(
+                  otpVisibility ? "Verify" : "Login",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
@@ -92,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
       phoneNumber: "+91" + phoneController.text,
       verificationCompleted: (PhoneAuthCredential credential) async {
         await auth.signInWithCredential(credential).then((value) {
-          print("You are logged in successfully");
+          Get.snackbar("Success", "You have logged in successfully");
         });
       },
       verificationFailed: (FirebaseAuthException e) {
@@ -121,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
       () {
         if (user != null) {
           Fluttertoast.showToast(
-            msg: "You are logged in successfully",
+            msg: "Login Successfully",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -137,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         } else {
           Fluttertoast.showToast(
-            msg: "your login is failed",
+            msg: "Login failed",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
