@@ -46,8 +46,8 @@ class GridviewWork extends StatelessWidget {
     return Scaffold(
         body: GridView.builder(
       itemCount: 12,
-      padding: EdgeInsets.only(top: 30),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      padding: const EdgeInsets.only(top: 30),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 50,
           mainAxisExtent: 100,
@@ -59,18 +59,22 @@ class GridviewWork extends StatelessWidget {
         ),
         child: Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 50,
             ),
-            Icon(icons[index],
-            size: 36,),
-            SizedBox(
+            Icon(
+              icons[index],
+              size: 36,
+            ),
+            const SizedBox(
               width: 50,
             ),
-            Text("Heart\nShaker",
-            style: GoogleFonts.roboto(
-              fontSize: 18,
-            ),)
+            Text(
+              "Heart\nShaker",
+              style: GoogleFonts.roboto(
+                fontSize: 18,
+              ),
+            )
           ],
         ),
       ),

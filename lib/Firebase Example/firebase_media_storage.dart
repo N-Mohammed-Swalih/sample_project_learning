@@ -71,7 +71,7 @@ class _FireMediaStorageState extends State {
                                   subtitle: Text(image['description']),
                                   trailing: IconButton(
                                       onPressed: () =>
-                                          deletaData(image['path']),
+                                          deleteData(image['path']),
                                       icon: Icon(Icons.delete)),
                                 ),
                               );
@@ -131,7 +131,7 @@ class _FireMediaStorageState extends State {
 
       images.add({
         'imageurl': fileurl,
-        'path': singlefile,
+        'path': singlefile.fullPath,
         'uploadedBy': metadata.customMetadata?['uploadedBy'] ?? 'No Data',
         'description':
             metadata.customMetadata?['descriptiion'] ?? 'No Description'
@@ -140,7 +140,7 @@ class _FireMediaStorageState extends State {
     return images;
   }
 
-  Future<void> deletaData(String imagepath) async {
+  Future<void> deleteData(String imagepath) async {
     await storage.ref(imagepath).delete();
     setState(() {});
   }
