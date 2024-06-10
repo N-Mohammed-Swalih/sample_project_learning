@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:luminar_sample_project/Supabase/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../Components/avatar.dart';
+
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
 
