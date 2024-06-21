@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'Pages/login_page.dart';
 import 'Pages/splash_page.dart';
 
-void main() async {
+Future<void> main() async {
   await Supabase.initialize(
     url: 'https://eksucuarcywfvaiblkjn.supabase.co',
     anonKey:
@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const SplashPage(),
-          '/login': (context) =>const  SupabaseLoginPage(),
-          '/account':(context)=> const AccountPage(),
+          '/login': (context) => const SupabaseLoginPage(),
+          '/account': (context) => const AccountPage(),
         });
   }
 }

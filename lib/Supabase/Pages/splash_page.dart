@@ -16,16 +16,16 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _redirect() async {
-    // await Future.delayed(Duration.zero);
-    // if (!mounted) {
-    //   return;
-    // }
+    await Future.delayed(Duration.zero);
+    if (!mounted) {
+      return;
+    }
     final session = supabase.auth.currentSession;
 
     if (session != null) {
       Navigator.of(context).pushReplacementNamed('/account');
     } else {
-      Navigator.of(context).pushReplacementNamed('/loging');
+      Navigator.of(context).pushReplacementNamed('/login');
     }
   }
 

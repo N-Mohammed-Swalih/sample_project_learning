@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:luminar_sample_project/Supabase/main.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -50,7 +51,11 @@ class _LoginPageState extends State<SupabaseLoginPage> {
               onPressed: () async {
                 try {
                   final email = _emailController.text.trim();
-                  await supabase.auth.signInWithOtp(email: email);
+                  await supabase.auth.signInWithOtp(
+                      email: email,
+                      emailRedirectTo: kIsWeb
+                          ? null
+                          : 'io.supabase.flutter://signin-callback/');
 
                   if (!mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
